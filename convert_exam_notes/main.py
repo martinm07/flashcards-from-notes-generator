@@ -96,6 +96,11 @@ def main():
         action="store_true",
         help="Skip LLM generation and upload existing cards from output file to Anki",
     )
+    parser.add_argument(
+        "--skip-anki",
+        action="store_true",
+        help="Skip sending cards to Anki, and focus only on LLM generation",
+    )
 
     args = parser.parse_args()
 
@@ -142,7 +147,7 @@ def main():
     print(f"\nParsed {len(notes)} notes. Generating flashcards...\n")
 
     final_notes = generate_cards(notes, area, args.output)
-    upload_cards(final_notes)
+    if (not args.skip_anki): upload_cards(final_notes)
 
 
 if __name__ == "__main__":

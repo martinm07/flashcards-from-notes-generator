@@ -18,7 +18,7 @@ def send_card_to_anki(card):
                     "Front": card["front"],
                     "Back": final_back
                 },
-                "tags": card.get("tags", []),
+                "tags": [tag.replace(" ", "_") for tag in card.get("tags", [])],
                 "options": {"allowDuplicate": False}
             }
         }
