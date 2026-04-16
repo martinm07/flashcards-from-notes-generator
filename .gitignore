@@ -1,3 +1,8 @@
 log
 out*.txt
 __pycache__
+.venv
+.ruff_cache
+flashcards.json
+build
+*.egg-info

@@ -66,6 +66,21 @@ You can just find the expression for acceleration of one object and equate it to
 
 
 def get_llm_response(note: str):
+    # Dummy response for testing
+#     return """# Front
+
+# LLM GENERATED FRONT
+
+# # Back
+
+# LLM GENERATED BACK
+# There can be *italic*, **bold**
+
+# - bulleted
+# - lists
+
+# ~etc.~"""
+
     # There is also the API endpoint http://localhost:11434/api/generate
     #  which is just for a single prompt (+ a system prompt), but that doesn't properly expose "thinking support" apparently.
     response = requests.post("http://localhost:11434/api/chat", json={
@@ -96,32 +111,12 @@ def get_llm_response(note: str):
     i = 1
     while os.path.exists(f"log/{i}.txt"): i += 1
 
+    if not os.path.exists("log"):
+        os.makedirs("log")
+
     with open(f"log/{i}.txt", "w+") as f:
         f.write('"""' + thinking + '"""')
         f.write("\n\n==========\n\n")
         f.write('"""' + raw + '"""')
 
     return raw
-
-
-# cards = json.loads(raw)  # list of {front, back}
-
-# # 2. Push each card to Anki via AnkiConnect
-# for card in cards:
-#     payload = {
-#         "action": "addNote",
-#         "version": 6,
-#         "params": {
-#             "note": {
-#                 "deckName": "Maths::Error Log",  # change to your deck
-#                 "modelName": "Basic",
-#                 "fields": {
-#                     "Front": card["front"],
-#                     "Back": card["back"]
-#                 },
-#                 "options": {"allowDuplicate": False}
-#             }
-#         }
-#     }
-#     requests.post("http://localhost:8765", json=payload)
-#     print(f"Added: {card['front'][:60]}...")

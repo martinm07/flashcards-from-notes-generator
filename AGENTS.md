@@ -12,7 +12,7 @@ Currently, this project is a simple Python script and does not have a formal bui
 
 - **Running the application**:
   ```bash
-  python main.py
+  source .venv/bin/activate && python main.py
   ```
 
 ### Python Conventions
@@ -36,5 +36,8 @@ Currently, this project is a simple Python script and does not have a formal bui
 
 ## Project Structure
 - `main.py`: Entry point of the application.
+- `parser.py`: Contains the logic for converting user input into flashcards ready for LLM processing.
 - `prompt_llm.py`: Contains the logic for interacting with the LLM and managing prompts.
+- `llm_parser.py`: Contains the logic for destructuring the LLM output into a format ready for sending to Anki (including converting the markdown syntax into HTML).
+- `send_to_anki.py`: Handles connecting to Anki to add the generated cards.
 - `log/`: Directory where LLM thinking process and raw responses are logged.
