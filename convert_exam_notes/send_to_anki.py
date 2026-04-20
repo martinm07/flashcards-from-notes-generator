@@ -1,5 +1,5 @@
 import requests
-import markdown
+from convert_exam_notes.llm_parser import md
 
 def send_card_to_anki(card):
     # 2. Push each card to Anki via AnkiConnect
@@ -21,7 +21,7 @@ def send_card_to_anki(card):
                 "fields": {
                     "Front": card["front"],
                     "Back": final_back,
-                    "OriginalNote": markdown.markdown(card["original_note"])
+                    "OriginalNote": md.render(card["original_note"])
                 },
                 "tags": [tag.replace(" ", "_") for tag in card.get("tags", [])],
                 "options": {"allowDuplicate": False}
