@@ -26,17 +26,6 @@ def render_anki_block(self, tokens, idx, options, env):
 md.add_render_rule("math_inline", render_anki_inline)
 md.add_render_rule("math_block", render_anki_block)
 
-def fix_list_spacing(text: str) -> str:
-    list_item = r'[ \t]*(?:[-*+]|\d+\.)[ \t]'
-
-    # Add blank line BEFORE first list item if preceded by a non-empty line
-    text = re.sub(rf'(?m)(?<=\S)\n({list_item})', r'\n\n\1', text)
-
-    # Add blank line AFTER last list item if followed by a non-empty line
-    text = re.sub(rf'(?m)(^{list_item}.+)\n(?=\S)', r'\1\n\n', text)
-
-    return text
-
 
 def no_p_markdown(non_p_string) -> str:
     ''' Strip enclosing paragraph marks, <p> ... </p>,
@@ -59,9 +48,6 @@ def parse_llm_text(raw: str):
         if not raw:
             front_text = "[Error: Empty response]"
             back_text = "[Error: Empty response]"
-
-    front_text = fix_list_spacing(front_text)
-    back_text = fix_list_spacing(back_text)
 
     return {
         "front": no_p_markdown(front_text),
