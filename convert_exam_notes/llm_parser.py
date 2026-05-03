@@ -14,13 +14,13 @@ md = (
 def render_anki_inline(self, tokens, idx, options, env):
     # tokens[idx].content contains the raw LaTeX without the $ delimiters
     content = tokens[idx].content
-    return f'<anki-mathjax>{content}</anki-mathjax>'
+    return f'\\({content}\\)'
 
 def render_anki_block(self, tokens, idx, options, env):
     content = tokens[idx].content
     # Anki block equations usually don't need a <p> or <section> wrapper
     # unless you want specific spacing.
-    return f'<anki-mathjax block="true">{content}</anki-mathjax>'
+    return f'\\[{content}\\]'
 
 # 3. Register these rules to override the default plugin output
 md.add_render_rule("math_inline", render_anki_inline)
