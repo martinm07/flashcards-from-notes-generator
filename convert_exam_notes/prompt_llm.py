@@ -65,7 +65,7 @@ It is NOT necessary to find the expressions for the acceleration of each object 
 You can just find the expression for acceleration of one object and equate it to the known acceleration."""
 
 
-def get_llm_response(note: str):
+def get_llm_response(note: str, model: str, port: int = 11434):
     # Dummy response for testing
 #     return """# Front
 
@@ -83,9 +83,9 @@ def get_llm_response(note: str):
 
     # There is also the API endpoint http://localhost:11434/api/generate
     #  which is just for a single prompt (+ a system prompt), but that doesn't properly expose "thinking support" apparently.
-    response = requests.post("http://localhost:11434/api/chat", json={
+    response = requests.post(f"http://localhost:{port}/api/chat", json={
         # "model": "gemma4:31b",
-        "model": "gemma4:26b",
+        "model": model,
         "think": True,
         "stream": False,
         "messages": [
