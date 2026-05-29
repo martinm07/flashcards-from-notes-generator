@@ -6,3 +6,5 @@ __pycache__
 flashcards.json
 build
 *.egg-info
+dist
+main.spec
