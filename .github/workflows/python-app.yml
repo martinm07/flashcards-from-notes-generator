@@ -24,6 +24,8 @@ jobs:
           upload_exe_with_name: 'convert-exam-notes-windows'
           options: --onefile, --name "convert-exam-notes"
           # spec_options: # any custom arguments you want like: `--debug`
+          requirements: 'requirements.txt'
+
 
   pyinstaller-linux-build:
     runs-on: ubuntu-latest
@@ -39,3 +41,5 @@ jobs:
           upload_exe_with_name: 'convert-exam-notes-linux'
           options: --onefile, --name "convert-exam-notes"
           # spec_options: # any custom arguments you want like: `--debug`
+          requirements: 'requirements.txt'
+
