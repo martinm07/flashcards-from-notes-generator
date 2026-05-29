@@ -4,10 +4,7 @@
 name: Python application
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch: 
 
 permissions:
   contents: read
@@ -19,6 +16,7 @@ jobs:
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1.8.0
         with:
+          spec: 'convert_exam_notes/main.py'
           python_ver: '3.13.5'
           pyinstaller_ver: '==6.20.0'
           # spec: 'src/build.spec'
@@ -33,6 +31,7 @@ jobs:
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1.8.0
         with:
+          spec: 'convert_exam_notes/main.py'
           python_ver: '3.13.5'
           pyinstaller_ver: '==6.20.0'
           # spec: 'src/build.spec'
