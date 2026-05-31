@@ -131,8 +131,6 @@ def combine_subject_and_source(note: dict[str, str], possible_subjects: list[str
     subject = note["subject"] # e.g. "Computer Science"
     source = note["source"] # e.g. Set 1 Paper 3 (June 2021)
 
-    print("POSSIBLE SUBJECTS: ", possible_subjects)
-
     filtered_subjects = [subject_ for subject_ in possible_subjects if subject.lower().replace(" ", "") in subject_.lower().replace(" ", "")]
     source_paper = re.search("paper *(\\d+)", source.lower())
 

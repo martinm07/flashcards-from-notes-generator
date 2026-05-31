@@ -1,5 +1,6 @@
 import requests
 from convert_exam_notes.llm_parser import md
+from colorama import Fore, Style
 
 def send_card_to_anki(card, config: dict):
     # 2. Push each card to Anki via AnkiConnect
@@ -38,5 +39,18 @@ def send_card_to_anki(card, config: dict):
             }
         }
     }
-    requests.post("http://localhost:8765", json=payload)
+
+    try:
+        resp = requests.post("http://localhost:8765", json=payload).json()
+        error_msg: str | None = resp.get("error")
+        if error_msg:
+            print(Fore.RED + Style.BRIGHT + "\nERROR (from Anki-Connect): \"" + error_msg + '"' + Style.RESET_ALL)
+            if "model" in error_msg.lower() and "not found" in error_msg.lower():
+                print("This error is likely due to the 'PastPaperNote' note type not being created yet. See https://ankiweb.net/shared/info/1969769020")
+            elif "deck" in error_msg.lower() and "not found" in error_msg.lower():
+                print("Please create the deck in Anki so that this tool may add cards to it.")
+    except requests.exceptions.ConnectionError:
+        print(Fore.RED + Style.BRIGHT + "\nERROR: Was not able to send cards to Anki." + Style.RESET_ALL)
+        print("  This is because either:\n    1) Anki is not installed\n    2) Anki is installed, but not open\n    3) Anki is installed and open, but the Anki-Connect addon hasn't been installed (https://git.sr.ht/~foosoft/anki-connect)")
+
     # print(f"Added: {card['front'][:60]}...")

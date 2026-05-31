@@ -1,10 +1,11 @@
 [project]
 name = "past-paper-notes-flashcard-generator"
-version = "0.1.0"
+version = "1.0.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "colorama>=0.4.6",
     "linkify-it-py>=2.1.0",
     "markdown-it-py>=4.0.0",
     "mdit-py-plugins>=0.5.0",
