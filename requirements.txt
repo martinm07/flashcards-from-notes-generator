@@ -4,6 +4,8 @@ certifi==2026.5.20
     # via requests
 charset-normalizer==3.4.7
     # via requests
+colorama==0.4.6
+    # via past-paper-notes-flashcard-generator (pyproject.toml)
 idna==3.17
     # via requests
 linkify-it-py==2.1.0
@@ -17,6 +19,8 @@ mdit-py-plugins==0.6.1
 mdurl==0.1.2
     # via markdown-it-py
 requests==2.34.2
+    # via past-paper-notes-flashcard-generator (pyproject.toml)
+toml==0.10.2
     # via past-paper-notes-flashcard-generator (pyproject.toml)
 uc-micro-py==2.0.0
     # via linkify-it-py
